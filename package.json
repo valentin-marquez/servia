@@ -1,0 +1,48 @@
+{
+  "name": "servia",
+  "version": "1.0.0",
+  "description": "Sistema de Análisis Inteligente de OTs de Agua Servida con IA",
+  "type": "module",
+  "main": "src/main.ts",
+  "bin": {
+    "servia": "./src/main.ts"
+  },
+  "scripts": {
+    "dev": "bun run src/main.ts",
+    "start": "bun run src/main.ts",
+    "build": "bun build --compile --target=bun-windows-x64 --minify --external blessed ./src/main.ts --outfile servia.exe",
+    "build:baseline": "bun build --compile --target=bun-windows-x64-baseline --minify --external blessed ./src/main.ts --outfile servia.exe",
+    "build:modern": "bun build --compile --target=bun-windows-x64-modern --minify --external blessed ./src/main.ts --outfile servia.exe"
+  },
+  "keywords": [
+    "ots",
+    "agua-servida",
+    "deepseek",
+    "ia",
+    "clasificacion",
+    "analisis"
+  ],
+  "author": "Valentín Márquez",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/valentin-marquez/servia.git"
+  },
+  "dependencies": {
+    "@libn/csv": "^0.4.0",
+    "blessed": "^0.1.81",
+    "csv-parse": "^6.1.0",
+    "csv-stringify": "^6.6.0",
+    "openai": "^6.10.0"
+  },
+  "devDependencies": {
+    "@types/blessed": "^0.1.25",
+    "@types/bun": "latest"
+  },
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "os": [
+    "win32"
+  ]
+}

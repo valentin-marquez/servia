@@ -1,0 +1,39 @@
+name: Release
+
+description: 'Automatiza el proceso de release para Servia'
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Instalar Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Instalar dependencias
+        run: bun install --frozen-lockfile
+
+      - name: Build ejecutable
+        run: bun run build
+
+      - name: Subir artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: servia-exe
+          path: servia.exe
+
+      - name: Crear release en GitHub
+        uses: softprops/action-gh-release@v2
+        with:
+          files: servia.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
